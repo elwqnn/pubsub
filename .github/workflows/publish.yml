@@ -1,16 +1,49 @@
 name: Publish
 
 on:
+  workflow_dispatch:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
+    paths:
+      - 'Cargo.toml'
+
+permissions:
+  contents: write
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  check-version:
+    name: Check version tag
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      new: ${{ steps.check.outputs.new }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version
+        id: version
+        run: |
+          VERSION=$(grep '^version' Cargo.toml | sed 's/version = "\(.*\)"/\1/')
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if tag exists
+        id: check
+        run: |
+          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "new=false" >> $GITHUB_OUTPUT
+          else
+            echo "new=true" >> $GITHUB_OUTPUT
+          fi
+
   test:
     name: Test
+    needs: check-version
+    if: needs.check-version.outputs.new == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +53,8 @@ jobs:
 
   publish:
     name: Publish to crates.io
-    needs: test
+    needs: [check-version, test]
+    if: needs.check-version.outputs.new == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,3 +87,10 @@ jobs:
           publish pubsub-client
           publish pubsub-server
           publish pubsub
+
+      - name: Create version tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ needs.check-version.outputs.tag }}
+          git push origin ${{ needs.check-version.outputs.tag }}

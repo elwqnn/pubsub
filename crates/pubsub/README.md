@@ -74,7 +74,7 @@ client.subscribe("sensors.>").await?;
 
 ## Publishing
 
-The payload accepts anything that implements `AsRef<[u8]>` — `&str`, `String`, `Vec<u8>`, `Bytes`:
+The payload accepts anything that implements `AsRef<[u8]>` (`&str`, `String`, `Vec<u8>`, `Bytes`):
 
 ```rust
 client.publish("events.user.login", "alice").await?;
@@ -101,7 +101,7 @@ while let Some(msg) = sub.next_message().await {
 
 ## Queue groups
 
-Multiple subscribers sharing a queue group receive messages in a round-robin fashion — useful for load balancing workers:
+Multiple subscribers sharing a queue group receive messages round-robin, useful for load balancing workers:
 
 ```rust
 let _w1 = client.subscribe_queue("jobs.>", "workers").await?;

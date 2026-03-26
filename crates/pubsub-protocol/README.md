@@ -2,7 +2,7 @@
 
 Internal implementation detail of the [`pubsub`](https://crates.io/crates/pubsub) crate.
 
-This crate provides the wire protocol for the pubsub message broker. It is not intended for direct use — depend on [`pubsub`](https://crates.io/crates/pubsub) instead.
+This crate provides the wire protocol for the pubsub message broker. It is not intended for direct use. Depend on [`pubsub`](https://crates.io/crates/pubsub) instead.
 
 ## License
 

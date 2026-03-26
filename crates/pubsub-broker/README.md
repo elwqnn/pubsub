@@ -2,7 +2,7 @@
 
 Internal implementation detail of the [`pubsub`](https://crates.io/crates/pubsub) crate.
 
-This crate provides the broker engine for the pubsub message broker. It is not intended for direct use — depend on [`pubsub`](https://crates.io/crates/pubsub) instead, with the `server` feature enabled if you need to embed a broker.
+This crate provides the broker engine for the pubsub message broker. It is not intended for direct use. Depend on [`pubsub`](https://crates.io/crates/pubsub) instead, with the `server` feature enabled if you need to embed a broker.
 
 ## License
 
