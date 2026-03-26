@@ -1,0 +1,20 @@
+[package]
+name = "pubsub-transport-tcp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "TCP transport for the pubsub message broker"
+
+[dependencies]
+pubsub-core = { workspace = true }
+pubsub-protocol = { workspace = true }
+pubsub-broker = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+bytes = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }
+bytes = { workspace = true }
