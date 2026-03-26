@@ -1,0 +1,31 @@
+[package]
+name = "pubsub"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Lightweight TCP-based pub/sub message broker"
+
+[dependencies]
+pubsub-client = { workspace = true }
+pubsub-core = { workspace = true }
+bytes = { workspace = true }
+
+# Server embedding (optional)
+pubsub-broker = { workspace = true, optional = true }
+pubsub-transport-tcp = { workspace = true, optional = true }
+tokio-util = { workspace = true, optional = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+futures = { workspace = true }
+
+[features]
+default = []
+server = ["dep:pubsub-broker", "dep:pubsub-transport-tcp", "dep:tokio-util"]
+
+[[example]]
+name = "chat-server"
+required-features = ["server"]
+
+[[example]]
+name = "chat-client"
