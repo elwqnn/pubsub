@@ -1,5 +1,10 @@
 # pubsub
 
+[![Crates.io](https://img.shields.io/crates/v/pubsub.svg)](https://crates.io/crates/pubsub)
+[![docs.rs](https://docs.rs/pubsub/badge.svg)](https://docs.rs/pubsub)
+[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](#license)
+[![CI](https://github.com/Elwqnn/pubsub/actions/workflows/ci.yml/badge.svg)](https://github.com/Elwqnn/pubsub/actions/workflows/ci.yml)
+
 A fast, lightweight publish/subscribe message broker for Rust. Simple API, minimal setup, built on Tokio.
 
 Use it when your services or tasks need to talk to each other without being tightly coupled, whether they live in the same process or across the network. Supports wildcards, queue groups for load balancing, and request/reply.
@@ -68,4 +73,4 @@ The remaining crates (`pubsub-core`, `pubsub-protocol`, `pubsub-broker`, `pubsub
 
 ## License
 
-MIT
+Licensed under either of [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE) at your option.
