@@ -129,22 +129,24 @@ impl Session {
                 }
 
                 tagged = self.outbound_rx.recv() => {
-                    let Some((internal_sid, msg)) = tagged else {
+                    let Some(first) = tagged else {
                         break;
                     };
-                    // Map internal sid back to client sid.
-                    let Some(&client_sid) = self.internal_to_client.get(&internal_sid) else {
-                        continue;
-                    };
-                    let reply_to = msg.reply_to.as_ref().map(|s: &Subject| s.as_str().to_owned());
-                    let frame = Frame::Message {
-                        topic: msg.topic.as_str().to_owned(),
-                        sid: client_sid,
-                        payload: msg.payload,
-                        reply_to,
-                    };
-                    if let Err(e) = self.send_frame(frame).await {
+
+                    // Feed the first message, then drain any buffered messages
+                    // and flush once -- avoids a syscall per message.
+                    if let Err(e) = self.feed_tagged(first).await {
                         error!(peer = %self.peer_addr, error = %e, "failed to send message");
+                        break;
+                    }
+                    while let Ok(tagged) = self.outbound_rx.try_recv() {
+                        if let Err(e) = self.feed_tagged(tagged).await {
+                            error!(peer = %self.peer_addr, error = %e, "failed to send message");
+                            break;
+                        }
+                    }
+                    if let Err(e) = self.sink.flush().await {
+                        error!(peer = %self.peer_addr, error = %e, "failed to flush");
                         break;
                     }
                 }
@@ -176,6 +178,22 @@ impl Session {
 
         self.cleanup().await;
         info!(peer = %self.peer_addr, "session ended");
+    }
+
+    /// Encode a tagged outbound message into the write buffer without flushing.
+    async fn feed_tagged(&mut self, tagged: TaggedMessage) -> Result<(), PubSubError> {
+        let (internal_sid, msg) = tagged;
+        let Some(&client_sid) = self.internal_to_client.get(&internal_sid) else {
+            return Ok(());
+        };
+        let reply_to = msg.reply_to.as_ref().map(|s: &Subject| s.as_str().to_owned());
+        let frame = Frame::Message {
+            topic: msg.topic.as_str().to_owned(),
+            sid: client_sid,
+            payload: msg.payload,
+            reply_to,
+        };
+        self.sink.feed(frame).await
     }
 
     async fn send_frame(&mut self, frame: Frame) -> Result<(), PubSubError> {
