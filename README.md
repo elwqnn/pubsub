@@ -38,7 +38,7 @@ async fn main() -> pubsub::Result<()> {
 cargo install pubsub-server
 
 pubsub-server                        # binds to 127.0.0.1:4222
-pubsub-server --bind 0.0.0.0:4222   # listen on all interfaces
+pubsub-server --bind 0.0.0.0:4222    # listen on all interfaces
 RUST_LOG=info pubsub-server          # with logging
 ```
 
