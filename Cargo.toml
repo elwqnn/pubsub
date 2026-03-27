@@ -16,6 +16,7 @@ edition = "2024"
 license = "MIT"
 authors = ["Elwqnn <elwann.guillemot@epitech.eu>"]
 repository = "https://github.com/Elwqnn/pubsub"
+homepage = "https://github.com/Elwqnn/pubsub"
 rust-version = "1.85"
 
 [workspace.dependencies]

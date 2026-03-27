@@ -9,7 +9,7 @@ homepage.workspace = true
 description = "Pubsub message broker server binary"
 readme = "README.md"
 keywords = ["pubsub", "messaging", "tcp", "async", "broker"]
-categories = ["network-programming", "asynchronous"]s
+categories = ["network-programming", "asynchronous"]
 documentation = "https://docs.rs/pubsub-server"
 
 [dependencies]
