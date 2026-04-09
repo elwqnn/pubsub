@@ -7,7 +7,7 @@ members = [
     "crates/pubsub-transport-tcp",
     "crates/pubsub-server",
     "crates/pubsub-client",
-    "crates/pubsub",
+    "crates/topiq",
 ]
 
 [workspace.package]
@@ -26,7 +26,7 @@ pubsub-protocol = { path = "crates/pubsub-protocol", version = "0.1" }
 pubsub-broker = { path = "crates/pubsub-broker", version = "0.1" }
 pubsub-transport-tcp = { path = "crates/pubsub-transport-tcp", version = "0.1" }
 pubsub-client = { path = "crates/pubsub-client", version = "0.1" }
-pubsub = { path = "crates/pubsub", version = "0.1" }
+topiq = { path = "crates/topiq", version = "0.1" }
 
 # Async runtime
 tokio = { version = "1", features = ["full"] }

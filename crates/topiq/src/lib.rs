@@ -7,7 +7,7 @@
 //!
 //! ```ignore
 //! use std::time::Duration;
-//! use pubsub::{Client, ConnectOptions};
+//! use topiq::{Client, ConnectOptions};
 //!
 //! #[tokio::main]
 //! async fn main() -> pubsub::Result<()> {
@@ -28,12 +28,18 @@
 //!     Ok(())
 //! }
 //! ```
+//!
+//! Add `topiq` to your `Cargo.toml`:
+//! ```toml
+//! [dependencies]
+//! topiq = "0.1"
+//! ```
 
 // Re-export bytes::Bytes so users don't need a separate `bytes` dependency.
 pub use bytes::Bytes;
 
 // Client types.
-pub use pubsub_client::{Client, ConnectOptions, SubscriptionStream};
+pub use pubsub_client::{Client, ConnectOptions, Delivery, SubscriptionStream};
 
 // Core types that users interact with.
 pub use pubsub_core::{Message, PubSubError, Result, Subject};
@@ -43,11 +49,12 @@ pub use pubsub_core::{Message, PubSubError, Result, Subject};
 /// Enable with the `server` feature flag:
 /// ```toml
 /// [dependencies]
-/// pubsub = { version = "0.1", features = ["server"] }
+/// topiq = { version = "0.1", features = ["server"] }
 /// ```
 #[cfg(feature = "server")]
 pub mod server {
-    pub use pubsub_broker::{Router, RoutingResult, SubscriptionRegistry};
+    pub use pubsub_broker::{AckTracker, Router, RoutingResult, SubscriptionRegistry};
+    pub use pubsub_broker::ack_tracker::run_redelivery_scanner;
     pub use pubsub_core::BrokerConfig;
     pub use pubsub_transport_tcp::TcpTransportListener;
     pub use tokio_util::sync::CancellationToken;

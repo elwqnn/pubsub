@@ -590,22 +590,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "pubsub"
-version = "0.1.2"
-dependencies = [
- "bytes",
- "futures",
- "pubsub-broker",
- "pubsub-client",
- "pubsub-core",
- "pubsub-transport-tcp",
- "tokio",
- "tokio-util",
-]
-
-[[package]]
 name = "pubsub-broker"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "bytes",
  "criterion",
@@ -613,12 +599,13 @@ dependencies = [
  "pubsub-core",
  "tokio",
  "tokio-test",
+ "tokio-util",
  "tracing",
 ]
 
 [[package]]
 name = "pubsub-client"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "bytes",
  "dashmap",
@@ -633,7 +620,7 @@ dependencies = [
 
 [[package]]
 name = "pubsub-core"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "bytes",
  "criterion",
@@ -646,7 +633,7 @@ dependencies = [
 
 [[package]]
 name = "pubsub-protocol"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "bytes",
  "criterion",
@@ -661,7 +648,7 @@ dependencies = [
 
 [[package]]
 name = "pubsub-server"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "bytes",
  "clap",
@@ -680,7 +667,7 @@ dependencies = [
 
 [[package]]
 name = "pubsub-transport-tcp"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "bytes",
  "futures",
@@ -1011,6 +998,20 @@ dependencies = [
  "futures-sink",
  "pin-project-lite",
  "tokio",
+]
+
+[[package]]
+name = "topiq"
+version = "0.1.3"
+dependencies = [
+ "bytes",
+ "futures",
+ "pubsub-broker",
+ "pubsub-client",
+ "pubsub-core",
+ "pubsub-transport-tcp",
+ "tokio",
+ "tokio-util",
 ]
 
 [[package]]

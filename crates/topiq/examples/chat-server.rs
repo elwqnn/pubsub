@@ -1,6 +1,6 @@
 //! Chat server: embedded broker + chat service.
 //!
-//! Run with: `cargo run --example chat-server -p pubsub --features server`
+//! Run with: `cargo run --example chat-server -p topiq --features server`
 
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
@@ -10,10 +10,11 @@ use futures::StreamExt;
 use tokio::signal;
 use tokio::sync::Mutex;
 
-use pubsub::server::{
-    BrokerConfig, CancellationToken, Router, SubscriptionRegistry, TcpTransportListener,
+use topiq::server::{
+    AckTracker, BrokerConfig, CancellationToken, Router, SubscriptionRegistry,
+    TcpTransportListener,
 };
-use pubsub::{Client, ConnectOptions};
+use topiq::{Client, ConnectOptions};
 
 /// Shared state for tracking rooms and users.
 struct ChatState {
@@ -63,15 +64,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // --- Start embedded broker ---
     let registry = Arc::new(SubscriptionRegistry::new());
-    let router = Arc::new(Router::new(registry.clone()));
-
     let config = BrokerConfig {
         bind_addr: bind_addr.parse()?,
         ..Default::default()
     };
+    let ack_tracker = Arc::new(AckTracker::new(config.ack_timeout, config.max_redeliveries));
+    let router = Arc::new(Router::new(registry.clone(), ack_tracker.clone()));
 
     let listener =
-        TcpTransportListener::bind(&config, router, registry, shutdown.clone()).await?;
+        TcpTransportListener::bind(&config, router, registry, ack_tracker, shutdown.clone())
+            .await?;
     let addr = listener.local_addr()?;
 
     let listener_shutdown = shutdown.clone();

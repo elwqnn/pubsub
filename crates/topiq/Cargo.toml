@@ -1,5 +1,5 @@
 [package]
-name = "pubsub"
+name = "topiq"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -10,7 +10,7 @@ description = "Lightweight TCP-based pub/sub message broker"
 readme = "README.md"
 keywords = ["pubsub", "messaging", "tcp", "async", "broker"]
 categories = ["network-programming", "asynchronous"]
-documentation = "https://docs.rs/pubsub"
+documentation = "https://docs.rs/topiq"
 
 [dependencies]
 pubsub-client = { workspace = true }

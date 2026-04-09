@@ -1,13 +1,13 @@
 //! Interactive chat client.
 //!
-//! Run with: `cargo run --example chat-client -p pubsub -- --name alice --room general`
+//! Run with: `cargo run --example chat-client -p topiq -- --name alice --room general`
 
 use std::time::Duration;
 
 use futures::StreamExt;
 use tokio::io::{AsyncBufReadExt, BufReader};
 
-use pubsub::{Client, ConnectOptions};
+use topiq::{Client, ConnectOptions};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
