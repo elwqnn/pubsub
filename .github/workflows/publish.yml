@@ -80,13 +80,13 @@ jobs:
             sleep 30
           }
 
-          publish pubsub-core
-          publish pubsub-protocol
-          publish pubsub-broker
-          publish pubsub-transport-tcp
-          publish pubsub-client
-          publish pubsub-server
-          publish pubsub
+          publish topiq-core
+          publish topiq-protocol
+          publish topiq-broker
+          publish topiq-transport-tcp
+          publish topiq-client
+          publish topiq-server
+          publish topiq
 
       - name: Create version tag
         run: |

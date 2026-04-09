@@ -1,0 +1,30 @@
+[package]
+name = "topiq-server"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "Topiq message broker server binary"
+readme = "README.md"
+keywords = ["topiq", "messaging", "tcp", "async", "broker"]
+categories = ["network-programming", "asynchronous"]
+documentation = "https://docs.rs/topiq-server"
+
+[dependencies]
+topiq-core = { workspace = true }
+topiq-broker = { workspace = true }
+topiq-transport-tcp = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+clap = { workspace = true }
+
+[dev-dependencies]
+topiq-client = { workspace = true }
+topiq-protocol = { workspace = true }
+bytes = { workspace = true }
+futures = { workspace = true }
+tokio-test = { workspace = true }

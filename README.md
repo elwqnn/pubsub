@@ -1,9 +1,9 @@
-# pubsub
+# topiq
 
-[![Crates.io](https://img.shields.io/crates/v/pubsub.svg)](https://crates.io/crates/pubsub)
-[![docs.rs](https://docs.rs/pubsub/badge.svg)](https://docs.rs/pubsub)
+[![Crates.io](https://img.shields.io/crates/v/topiq.svg)](https://crates.io/crates/topiq)
+[![docs.rs](https://docs.rs/topiq/badge.svg)](https://docs.rs/topiq)
 [![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue.svg)](#license)
-[![CI](https://github.com/Elwqnn/pubsub/actions/workflows/ci.yml/badge.svg)](https://github.com/Elwqnn/pubsub/actions/workflows/ci.yml)
+[![CI](https://github.com/Elwqnn/topiq/actions/workflows/ci.yml/badge.svg)](https://github.com/Elwqnn/topiq/actions/workflows/ci.yml)
 
 A fast, lightweight publish/subscribe message broker for Rust. Simple API, minimal setup, built on Tokio.
 
@@ -15,15 +15,15 @@ Use it when your services or tasks need to talk to each other without being tigh
 
 ```toml
 [dependencies]
-pubsub = "0.1"
+topiq = "0.1"
 tokio = { version = "1", features = ["full"] }
 ```
 
 ```rust
-use pubsub::{Client, ConnectOptions};
+use topiq::{Client, ConnectOptions};
 
 #[tokio::main]
-async fn main() -> pubsub::Result<()> {
+async fn main() -> topiq::Result<()> {
     let client = Client::connect(ConnectOptions::default()).await?;
 
     client.publish("greet", "hello world").await?;
@@ -40,14 +40,14 @@ async fn main() -> pubsub::Result<()> {
 ## Running the server
 
 ```sh
-cargo install pubsub-server
+cargo install topiq-server
 
-pubsub-server                        # binds to 127.0.0.1:4222
-pubsub-server --bind 0.0.0.0:4222    # listen on all interfaces
-RUST_LOG=info pubsub-server          # with logging
+topiq-server                        # binds to 127.0.0.1:4222
+topiq-server --bind 0.0.0.0:4222    # listen on all interfaces
+RUST_LOG=info topiq-server          # with logging
 ```
 
-Or embed the broker directly in your application with the `server` feature. See the [`pubsub` crate docs](crates/pubsub/README.md) for details.
+Or embed the broker directly in your application with the `server` feature. See the [`topiq` crate docs](crates/topiq/README.md) for details.
 
 ## Features
 
@@ -58,18 +58,18 @@ Or embed the broker directly in your application with the `server` feature. See 
 
 ## Documentation
 
-- [**Client API guide**](crates/pubsub/README.md): connecting, subscribing, wildcards, request/reply, queue groups, embedding a broker
-- [**Server CLI reference**](crates/pubsub-server/README.md): running and configuring the standalone broker
-- [**Examples**](crates/pubsub/examples): runnable demos
+- [**Client API guide**](crates/topiq/README.md): connecting, subscribing, wildcards, request/reply, queue groups, embedding a broker
+- [**Server CLI reference**](crates/topiq-server/README.md): running and configuring the standalone broker
+- [**Examples**](crates/topiq/examples): runnable demos
 
 ## Crates
 
 | Crate | Description |
 |-------|-------------|
-| [`pubsub`](crates/pubsub) | Client library (start here) |
-| [`pubsub-server`](crates/pubsub-server) | Standalone broker binary |
+| [`topiq`](crates/topiq) | Client library (start here) |
+| [`topiq-server`](crates/topiq-server) | Standalone broker binary |
 
-The remaining crates (`pubsub-core`, `pubsub-protocol`, `pubsub-broker`, `pubsub-client`, `pubsub-transport-tcp`) are internal implementation details.
+The remaining crates (`topiq-core`, `topiq-protocol`, `topiq-broker`, `topiq-client`, `topiq-transport-tcp`) are internal implementation details.
 
 ## License
 

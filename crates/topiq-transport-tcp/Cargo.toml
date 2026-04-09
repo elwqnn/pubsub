@@ -1,0 +1,20 @@
+[package]
+name = "topiq-transport-tcp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "TCP transport for the topiq message broker"
+
+[dependencies]
+topiq-core = { workspace = true }
+topiq-protocol = { workspace = true }
+topiq-broker = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+futures = { workspace = true }
+bytes = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }
+bytes = { workspace = true }

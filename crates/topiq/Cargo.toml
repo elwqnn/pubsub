@@ -8,18 +8,18 @@ repository.workspace = true
 homepage.workspace = true
 description = "Lightweight TCP-based pub/sub message broker"
 readme = "README.md"
-keywords = ["pubsub", "messaging", "tcp", "async", "broker"]
+keywords = ["topiq", "messaging", "tcp", "async", "broker"]
 categories = ["network-programming", "asynchronous"]
 documentation = "https://docs.rs/topiq"
 
 [dependencies]
-pubsub-client = { workspace = true }
-pubsub-core = { workspace = true }
+topiq-client = { workspace = true }
+topiq-core = { workspace = true }
 bytes = { workspace = true }
 
 # Server embedding (optional)
-pubsub-broker = { workspace = true, optional = true }
-pubsub-transport-tcp = { workspace = true, optional = true }
+topiq-broker = { workspace = true, optional = true }
+topiq-transport-tcp = { workspace = true, optional = true }
 tokio-util = { workspace = true, optional = true }
 
 [dev-dependencies]
@@ -28,7 +28,7 @@ futures = { workspace = true }
 
 [features]
 default = []
-server = ["dep:pubsub-broker", "dep:pubsub-transport-tcp", "dep:tokio-util"]
+server = ["dep:topiq-broker", "dep:topiq-transport-tcp", "dep:tokio-util"]
 
 [[example]]
 name = "chat-server"

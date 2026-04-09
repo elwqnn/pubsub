@@ -1,0 +1,25 @@
+[package]
+name = "topiq-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "Core types for the topiq message broker"
+readme = "README.md"
+
+[dependencies]
+bytes = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true, features = ["sync"] }
+
+[dev-dependencies]
+criterion = { workspace = true }
+rmp-serde = { workspace = true }
+tokio-test = { workspace = true }
+
+[[bench]]
+name = "core_benchmarks"
+harness = false

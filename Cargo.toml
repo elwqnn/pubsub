@@ -1,12 +1,12 @@
 [workspace]
 resolver = "3"
 members = [
-    "crates/pubsub-core",
-    "crates/pubsub-protocol",
-    "crates/pubsub-broker",
-    "crates/pubsub-transport-tcp",
-    "crates/pubsub-server",
-    "crates/pubsub-client",
+    "crates/topiq-core",
+    "crates/topiq-protocol",
+    "crates/topiq-broker",
+    "crates/topiq-transport-tcp",
+    "crates/topiq-server",
+    "crates/topiq-client",
     "crates/topiq",
 ]
 
@@ -15,17 +15,17 @@ version = "0.1.3"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 authors = ["Elwqnn <elwann.guillemot@epitech.eu>"]
-repository = "https://github.com/Elwqnn/pubsub"
-homepage = "https://github.com/Elwqnn/pubsub"
+repository = "https://github.com/Elwqnn/topiq"
+homepage = "https://github.com/Elwqnn/topiq"
 rust-version = "1.85"
 
 [workspace.dependencies]
 # Internal crates
-pubsub-core = { path = "crates/pubsub-core", version = "0.1" }
-pubsub-protocol = { path = "crates/pubsub-protocol", version = "0.1" }
-pubsub-broker = { path = "crates/pubsub-broker", version = "0.1" }
-pubsub-transport-tcp = { path = "crates/pubsub-transport-tcp", version = "0.1" }
-pubsub-client = { path = "crates/pubsub-client", version = "0.1" }
+topiq-core = { path = "crates/topiq-core", version = "0.1" }
+topiq-protocol = { path = "crates/topiq-protocol", version = "0.1" }
+topiq-broker = { path = "crates/topiq-broker", version = "0.1" }
+topiq-transport-tcp = { path = "crates/topiq-transport-tcp", version = "0.1" }
+topiq-client = { path = "crates/topiq-client", version = "0.1" }
 topiq = { path = "crates/topiq", version = "0.1" }
 
 # Async runtime

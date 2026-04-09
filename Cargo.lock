@@ -590,97 +590,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pubsub-broker"
-version = "0.1.3"
-dependencies = [
- "bytes",
- "criterion",
- "dashmap",
- "pubsub-core",
- "tokio",
- "tokio-test",
- "tokio-util",
- "tracing",
-]
-
-[[package]]
-name = "pubsub-client"
-version = "0.1.3"
-dependencies = [
- "bytes",
- "dashmap",
- "futures",
- "pubsub-core",
- "pubsub-protocol",
- "tokio",
- "tokio-test",
- "tokio-util",
- "tracing",
-]
-
-[[package]]
-name = "pubsub-core"
-version = "0.1.3"
-dependencies = [
- "bytes",
- "criterion",
- "rmp-serde",
- "serde",
- "thiserror",
- "tokio",
- "tokio-test",
-]
-
-[[package]]
-name = "pubsub-protocol"
-version = "0.1.3"
-dependencies = [
- "bytes",
- "criterion",
- "pubsub-core",
- "rmp-serde",
- "serde",
- "serde_bytes",
- "tokio",
- "tokio-test",
- "tokio-util",
-]
-
-[[package]]
-name = "pubsub-server"
-version = "0.1.3"
-dependencies = [
- "bytes",
- "clap",
- "futures",
- "pubsub-broker",
- "pubsub-client",
- "pubsub-core",
- "pubsub-protocol",
- "pubsub-transport-tcp",
- "tokio",
- "tokio-test",
- "tokio-util",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "pubsub-transport-tcp"
-version = "0.1.3"
-dependencies = [
- "bytes",
- "futures",
- "pubsub-broker",
- "pubsub-core",
- "pubsub-protocol",
- "tokio",
- "tokio-test",
- "tokio-util",
- "tracing",
-]
-
-[[package]]
 name = "quote"
 version = "1.0.45"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1006,12 +915,102 @@ version = "0.1.3"
 dependencies = [
  "bytes",
  "futures",
- "pubsub-broker",
- "pubsub-client",
- "pubsub-core",
- "pubsub-transport-tcp",
  "tokio",
  "tokio-util",
+ "topiq-broker",
+ "topiq-client",
+ "topiq-core",
+ "topiq-transport-tcp",
+]
+
+[[package]]
+name = "topiq-broker"
+version = "0.1.3"
+dependencies = [
+ "bytes",
+ "criterion",
+ "dashmap",
+ "tokio",
+ "tokio-test",
+ "topiq-core",
+ "tracing",
+]
+
+[[package]]
+name = "topiq-client"
+version = "0.1.3"
+dependencies = [
+ "bytes",
+ "dashmap",
+ "futures",
+ "tokio",
+ "tokio-test",
+ "tokio-util",
+ "topiq-core",
+ "topiq-protocol",
+ "tracing",
+]
+
+[[package]]
+name = "topiq-core"
+version = "0.1.3"
+dependencies = [
+ "bytes",
+ "criterion",
+ "rmp-serde",
+ "serde",
+ "thiserror",
+ "tokio",
+ "tokio-test",
+]
+
+[[package]]
+name = "topiq-protocol"
+version = "0.1.3"
+dependencies = [
+ "bytes",
+ "criterion",
+ "rmp-serde",
+ "serde",
+ "serde_bytes",
+ "tokio",
+ "tokio-test",
+ "tokio-util",
+ "topiq-core",
+]
+
+[[package]]
+name = "topiq-server"
+version = "0.1.3"
+dependencies = [
+ "bytes",
+ "clap",
+ "futures",
+ "tokio",
+ "tokio-test",
+ "tokio-util",
+ "topiq-broker",
+ "topiq-client",
+ "topiq-core",
+ "topiq-protocol",
+ "topiq-transport-tcp",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "topiq-transport-tcp"
+version = "0.1.3"
+dependencies = [
+ "bytes",
+ "futures",
+ "tokio",
+ "tokio-test",
+ "tokio-util",
+ "topiq-broker",
+ "topiq-core",
+ "topiq-protocol",
+ "tracing",
 ]
 
 [[package]]

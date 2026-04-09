@@ -1,4 +1,4 @@
-# pubsub
+# topiq
 
 Lightweight TCP-based publish/subscribe client library.
 
@@ -8,19 +8,19 @@ This crate re-exports the full consumer-facing API. It is the only dependency yo
 
 ```toml
 # Client only
-pubsub = "0.1"
+topiq = "0.1"
 
 # Client + embedded broker
-pubsub = { version = "0.1", features = ["server"] }
+topiq = { version = "0.1", features = ["server"] }
 ```
 
 ## Quick start
 
 ```rust
-use pubsub::{Client, ConnectOptions};
+use topiq::{Client, ConnectOptions};
 
 #[tokio::main]
-async fn main() -> pubsub::Result<()> {
+async fn main() -> topiq::Result<()> {
     // Connects to 127.0.0.1:4222 by default
     let client = Client::connect(ConnectOptions::default()).await?;
 
@@ -40,7 +40,7 @@ async fn main() -> pubsub::Result<()> {
 ## Connecting
 
 ```rust
-use pubsub::ConnectOptions;
+use topiq::ConnectOptions;
 
 // Default: 127.0.0.1:4222
 ConnectOptions::default()
@@ -125,8 +125,8 @@ while let Some(msg) = sub.next().await {
 
 ```rust
 use std::sync::Arc;
-use pubsub::server::{BrokerConfig, CancellationToken, Router, SubscriptionRegistry, TcpTransportListener};
-use pubsub::{Client, ConnectOptions};
+use topiq::server::{BrokerConfig, CancellationToken, Router, SubscriptionRegistry, TcpTransportListener};
+use topiq::{Client, ConnectOptions};
 
 let shutdown = CancellationToken::new();
 let registry = Arc::new(SubscriptionRegistry::new());

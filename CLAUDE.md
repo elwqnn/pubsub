@@ -7,14 +7,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```sh
 cargo build --workspace                              # build all crates
 cargo test --workspace                               # run all tests
-cargo test -p pubsub-broker                          # test a single crate
-cargo test -p pubsub-broker topic_trie               # run tests matching a name
+cargo test -p topiq-broker                          # test a single crate
+cargo test -p topiq-broker topic_trie               # run tests matching a name
 cargo clippy --workspace --all-targets -D warnings   # lint (CI runs this)
 cargo bench --workspace                              # run all benchmarks
-cargo bench -p pubsub-broker                         # bench a single crate
+cargo bench -p topiq-broker                         # bench a single crate
 ```
 
-The `pubsub-server` binary: `cargo run -p pubsub-server -- --bind 127.0.0.1:4222`
+The `topiq-server` binary: `cargo run -p topiq-server -- --bind 127.0.0.1:4222`
 
 Examples require the `server` feature: `cargo run -p topiq --features server --example chat-server`
 
@@ -24,19 +24,19 @@ Lightweight TCP pub/sub message broker. Seven workspace crates, layered bottom-u
 
 ```
 topiq (facade, re-exports client + optional server)
-  pubsub-client        -- async Client, SubscriptionStream, ConnectOptions
-  pubsub-server        -- standalone CLI binary (clap)
-  pubsub-transport-tcp -- TcpTransportListener, Session (per-connection loop)
-  pubsub-broker        -- Router, SubscriptionRegistry, TopicTrie, QueueGroupSelector
-  pubsub-protocol      -- Frame enum, PubSubCodec (MessagePack over tokio-util)
-  pubsub-core          -- Message, Subject, SubscriptionId, BrokerConfig, PubSubError
+  topiq-client        -- async Client, SubscriptionStream, ConnectOptions
+  topiq-server        -- standalone CLI binary (clap)
+  topiq-transport-tcp -- TcpTransportListener, Session (per-connection loop)
+  topiq-broker        -- Router, SubscriptionRegistry, TopicTrie, QueueGroupSelector
+  topiq-protocol      -- Frame enum, TopiqCodec (MessagePack over tokio-util)
+  topiq-core          -- Message, Subject, SubscriptionId, BrokerConfig, TopiqError
 ```
 
-**Only `topiq` and `pubsub-server` are public crates.** The rest are internal.
+**Only `topiq` and `topiq-server` are public crates.** The rest are internal.
 
 ### Key data flow
 
-1. Client sends TCP bytes -> `PubSubCodec` decodes into `Frame`
+1. Client sends TCP bytes -> `TopiqCodec` decodes into `Frame`
 2. `Session` dispatches frames: `Frame::Publish` -> `Router::route()`
 3. `Router` queries `TopicTrie` for matching subscriptions, fans out via MPSC channels
 4. For ACK-aware subscriptions, `Router` assigns a msg_id via `AckTracker::track()` before sending
@@ -53,7 +53,7 @@ Opt-in per subscription. Fire-and-forget (no ACK) is the default.
 
 ### Feature flags
 
-The `topiq` crate has one feature: `server` -- enables embedding the broker in-process (adds `pubsub-broker` + `pubsub-transport-tcp` deps).
+The `topiq` crate has one feature: `server` -- enables embedding the broker in-process (adds `topiq-broker` + `topiq-transport-tcp` deps).
 
 ### Important patterns
 

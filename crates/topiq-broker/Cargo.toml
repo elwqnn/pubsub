@@ -1,0 +1,26 @@
+[package]
+name = "topiq-broker"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "Broker engine for the topiq message broker"
+readme = "README.md"
+
+[dependencies]
+topiq-core = { workspace = true }
+tokio = { workspace = true }
+dashmap = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+criterion = { workspace = true }
+tokio = { workspace = true }
+tokio-test = { workspace = true }
+bytes = { workspace = true }
+
+[[bench]]
+name = "broker_benchmarks"
+harness = false

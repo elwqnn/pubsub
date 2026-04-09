@@ -10,7 +10,7 @@
 //! use topiq::{Client, ConnectOptions};
 //!
 //! #[tokio::main]
-//! async fn main() -> pubsub::Result<()> {
+//! async fn main() -> topiq::Result<()> {
 //!     let client = Client::connect(ConnectOptions::default()).await?;
 //!
 //!     // Publish (accepts &str, String, Vec<u8>, Bytes, etc.)
@@ -39,10 +39,10 @@
 pub use bytes::Bytes;
 
 // Client types.
-pub use pubsub_client::{Client, ConnectOptions, Delivery, SubscriptionStream};
+pub use topiq_client::{Client, ConnectOptions, SubscriptionStream};
 
 // Core types that users interact with.
-pub use pubsub_core::{Message, PubSubError, Result, Subject};
+pub use topiq_core::{Message, TopiqError, Result, Subject};
 
 /// Server-side types for embedding a broker in your application.
 ///
@@ -53,9 +53,8 @@ pub use pubsub_core::{Message, PubSubError, Result, Subject};
 /// ```
 #[cfg(feature = "server")]
 pub mod server {
-    pub use pubsub_broker::{AckTracker, Router, RoutingResult, SubscriptionRegistry};
-    pub use pubsub_broker::ack_tracker::run_redelivery_scanner;
-    pub use pubsub_core::BrokerConfig;
-    pub use pubsub_transport_tcp::TcpTransportListener;
+    pub use topiq_broker::{Router, RoutingResult, SubscriptionRegistry};
+    pub use topiq_core::BrokerConfig;
+    pub use topiq_transport_tcp::TcpTransportListener;
     pub use tokio_util::sync::CancellationToken;
 }
