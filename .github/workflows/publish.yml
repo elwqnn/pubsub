@@ -77,7 +77,7 @@ jobs:
               echo "=> $crate already published, skipping"
               return
             fi
-            sleep 30
+            sleep 60
           }
 
           publish topiq-core
