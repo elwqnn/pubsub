@@ -15,8 +15,8 @@ version = "0.1.3"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 authors = ["Elwqnn <elwann.guillemot@epitech.eu>"]
-repository = "https://github.com/Elwqnn/topiq"
-homepage = "https://github.com/Elwqnn/topiq"
+repository = "https://github.com/elwqnn/topiq"
+homepage = "https://github.com/elwqnn/topiq"
 rust-version = "1.85"
 
 [workspace.dependencies]
